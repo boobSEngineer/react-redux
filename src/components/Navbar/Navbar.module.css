@@ -1,0 +1,37 @@
+.nav {
+  grid-area: n;
+  background-color: rgb(65, 56, 73) ;
+  padding: 5px;
+
+}
+
+.item a.active {
+  color: aliceblue;
+}
+
+.item a {
+  color: #bcc4c4;
+  text-decoration: none;
+}
+.item{
+  border-radius: 3px;
+  border: 7px solid #5b5066;
+  background: #5b5066;
+  margin-top: 5px;
+  font-weight: 450;
+  text-align: center;
+}
+
+.block_change {
+  margin-top: 40px;
+  color: #bcc4c4;
+  text-decoration: none;
+
+
+}
+.block_change h3 {
+  margin-bottom: 5px;
+}
+.user_elements {
+  margin-top: 20px;
+}
