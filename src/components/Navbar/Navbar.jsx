@@ -3,10 +3,9 @@ import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
 import NavDialog from "./NavDialog/NavDialog";
 
-
-
 const Navbar = (props) => {
-    let usersDialogsElements = props.state.usersDialogs.map(user => <NavDialog id={user.id} name={user.name}/>)
+    let usersDialogsElements = props.store.GetState().navbarPage.usersDialogs.map(user => <NavDialog id={user.id}
+                                                                                                name={user.name}/>)
 
     return <nav className={s.nav}>
         <div className={s.item}>

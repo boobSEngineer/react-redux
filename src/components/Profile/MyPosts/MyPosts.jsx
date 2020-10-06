@@ -4,27 +4,28 @@ import Post from './Post/Post';
 
 
 const MyPosts = (props) => {
-    let postsElements = props.profilePage.postElements.map(post => <Post message={post.message} likeCounter={post.likesCounter}/>)
+    let postsElements = props.store.GetState().profilePage.postElements.map(post => <Post message={post.message}
+                                                                                     likeCounter={post.likesCounter}/>)
 
     let NewPostElement = React.createRef();
 
     let addPost = () => {
-        props.addPost();
-        props.updateNewPostText('');
+        props.store.addPost.bind(props.store)();
+        props.store.updateNewPostText.bind(props.store)('');
     }
 
     let onPostChange = () => {
         let text = NewPostElement.current.value;
-        props.updateNewPostText(text);
+        props.store.updateNewPostText.bind(props.store)(text);
     }
-    debugger;
     return (
         <div className={s.change_block}>
             <div>
                 <h3> My posts </h3>
             </div>
             <div>
-                <textarea onChange={onPostChange} ref={NewPostElement} value={props.profilePage.newPostText} />
+                <textarea onChange={onPostChange} ref={NewPostElement}
+                          value={props.store.GetState().profilePage.newPostText}/>
             </div>
             <button onClick={addPost}> Send</button>
             <div className={s.change_block_message}>
