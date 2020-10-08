@@ -1,3 +1,10 @@
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_POST = 'ADD-POST';
+
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+
+
 let store = {
     _state: {
         navbarPage: {
@@ -69,7 +76,23 @@ let store = {
             this._callSubscriber(this._state);
         }
     }
+}
+export default store;
 
+export const addPostActionCreate = () => {
+    return {type: ADD_POST}
 }
 
-export default store;
+export const updateNewPostTextActionCreate = (text) => {
+    return {type: UPDATE_NEW_POST_TEXT, newText: text}
+}
+
+export const addMessageActionCreate = () => {
+    return {type: ADD_MESSAGE}
+}
+
+export const updateNewMessageTextActionCreate = (text) => {
+    return {type: UPDATE_NEW_MESSAGE_TEXT, newMessage: text}
+}
+
+
