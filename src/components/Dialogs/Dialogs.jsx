@@ -3,28 +3,29 @@ import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 
 const Dialogs = (props) => {
-    let messagesElements = props.store.GetState().messagePage.messages.map(message => <Message dialog={message.message}/>);
+    let messagesElements = props.messagePage.messages.map(message => <Message dialog={message.message}/>);
 
     let NewMessageElement = React.createRef();
 
-    let AddPost = () => {
-        props.store.addMessage.bind(props.store)();
-        props.store.updateNewMessageText.bind(props.store)('');
+    let addMessage = () => {
+        props.dispatch({type: 'ADD-MESSAGE'})
+        props.dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', newMessage: ''})
     }
 
     let onMessageChange = () => {
         let text = NewMessageElement.current.value;
-        props.store.updateNewMessageText.bind(props.store)(text);
+        props.dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', newMessage: text})
     }
     return (
         <div>
             {messagesElements}
             <div className={s.message_change_block}>
                 <div>
-                    <textarea onChange={onMessageChange} ref={NewMessageElement} value={props.store.GetState().messagePage.newMessageText}/>
+                    <textarea onChange={onMessageChange} ref={NewMessageElement}
+                              value={props.messagePage.newMessageText}/>
                 </div>
                 <div className={s.item_button}>
-                    <button onClick={AddPost}>Отправить</button>
+                    <button onClick={addMessage}>Отправить</button>
                 </div>
             </div>
         </div>
