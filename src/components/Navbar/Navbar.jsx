@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 import NavDialog from "./NavDialog/NavDialog";
 
 const Navbar = (props) => {
+    debugger
     let usersDialogsElements = props.navbarPage.usersDialogs.map(user => <NavDialog id={user.id}
                                                                                                 name={user.name}/>)
 

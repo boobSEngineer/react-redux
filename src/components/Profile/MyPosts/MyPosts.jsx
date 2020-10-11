@@ -1,13 +1,12 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {addPostCreate, updateNewPostTextCreate} from "../../../redux/state";
+import {addPostCreate, updateNewPostTextCreate} from "../../../redux/profille-reducer";
 
 
 const MyPosts = (props) => {
     let postsElements = props.profilePage.postElements.map(post => <Post message={post.message}
                                                                          likeCounter={post.likesCounter}/>)
-
     let NewPostElement = React.createRef();
 
     let addPost = () => {
@@ -17,6 +16,7 @@ const MyPosts = (props) => {
 
     let onPostChange = () => {
         let text = NewPostElement.current.value;
+        debugger
         props.dispatch(updateNewPostTextCreate(text));
     }
     return (
