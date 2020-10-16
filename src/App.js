@@ -11,23 +11,22 @@ import Settings from "./components/Settings/Settings";
 import {Route} from "react-router-dom";
 
 const App = (props) => {
-    debugger
     return (
         <div className='wrapper'>
             <Header/>
             <Groups/>
-            <Navbar navbarPage={props.store.GetState().navbarPage}
+            <Navbar navbarPage={props.store.getState().navbarPage}
                 store={props.store}
                     dispatch={props.dispatch}/>
             <div className='wrapper_content'>
                 <Route path='/dialogs' render={() =>
                     <Dialogs
-                        messagePage={props.store.GetState().messagePage}
+                        messagePage={props.store.getState().messagePage}
                         store={props.store}
                         dispatch={props.dispatch}/>}/>
                 <Route path='/profile' render={() =>
                     <Profile
-                        profilePage={props.store.GetState().profilePage}
+                        profilePage={props.store.getState().profilePage}
                         store={props.store}
                         dispatch={props.dispatch}/>}/>
                 <Route path='/music' render={() => <Music/>}/>
