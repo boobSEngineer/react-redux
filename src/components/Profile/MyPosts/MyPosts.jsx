@@ -1,23 +1,23 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {addPostCreate, updateNewPostTextCreate} from "../../../redux/profille-reducer";
 
 
 const MyPosts = (props) => {
-    let postsElements = props.profilePage.postElements.map(post => <Post message={post.message}
+    let postsElements = props.postElements.map(post => <Post message={post.message}
                                                                          likeCounter={post.likesCounter}/>)
     let NewPostElement = React.createRef();
 
     let addPost = () => {
-        props.dispatch(addPostCreate());
-        props.dispatch(updateNewPostTextCreate(''));
+        props.addPost();
+        props.updateNewPostText('');
     }
 
     let onPostChange = () => {
         let text = NewPostElement.current.value;
-        props.dispatch(updateNewPostTextCreate(text));
+        props.updateNewPostText(text);
     }
+
     return (
         <div className={s.change_block}>
             <div>
@@ -25,7 +25,7 @@ const MyPosts = (props) => {
             </div>
             <div>
                 <textarea onChange={onPostChange} ref={NewPostElement}
-                          value={props.profilePage.newPostText}/>
+                          value={props.newPostText}/>
             </div>
             <button onClick={addPost}> Send</button>
             <div className={s.change_block_message}>

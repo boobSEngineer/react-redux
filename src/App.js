@@ -9,32 +9,29 @@ import Music from "./components/Music/Music";
 import Friends from "./components/Friends/Friends";
 import Settings from "./components/Settings/Settings";
 import {Route} from "react-router-dom";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import NavbarContainer from "./components/Navbar/NavbarContainer";
 
 const App = (props) => {
     return (
         <div className='wrapper'>
             <Header/>
             <Groups/>
-            <Navbar navbarPage={props.store.getState().navbarPage}
-                store={props.store}
-                    dispatch={props.dispatch}/>
+            <NavbarContainer
+                /*store={props.store}*//>
             <div className='wrapper_content'>
                 <Route path='/dialogs' render={() =>
-                    <Dialogs
-                        messagePage={props.store.getState().messagePage}
-                        store={props.store}
-                        dispatch={props.dispatch}/>}/>
-                <Route path='/profile' render={() =>
-                    <Profile
-                        profilePage={props.store.getState().profilePage}
-                        store={props.store}
-                        dispatch={props.dispatch}/>}/>
-                <Route path='/music' render={() => <Music/>}/>
-                <Route path='/friends' render={() => <Friends/>}/>
-                <Route path='/settings' render={() => <Settings/>}/>
-            </div>
-        </div>
-    );
+                    <DialogsContainer
+                    /*store={props.store}*//>}/>
+            <Route path='/profile' render={() =>
+                <Profile
+                /*store={props.store}*/ />}/>
+        <Route path='/music' render={() => <Music/>}/>
+        <Route path='/friends' render={() => <Friends/>}/>
+        <Route path='/settings' render={() => <Settings/>}/>
+    </div>
+</div>
+);
 }
 
 export default App;
