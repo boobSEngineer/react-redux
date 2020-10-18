@@ -18,7 +18,7 @@ const DialogsContainer = (props) => {
     return <storeContext.Consumer>
         {
             (store) => {
-                let state = store.getState();
+                let state = store.getState(); //
 
                 let onAddMessage = () => {
                     store.dispatch(addMessageCreate());
