@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         addMessage: () => {
             dispatch(addMessageCreate());
-            dispatch(updateNewMessageTextCreate(''));
         }
     }
 }

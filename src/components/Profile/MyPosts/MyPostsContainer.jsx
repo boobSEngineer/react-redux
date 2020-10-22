@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         addPost: () => {
             dispatch(addPostCreate());
-            dispatch(updateNewPostTextCreate(''));
         }
     }
 }
