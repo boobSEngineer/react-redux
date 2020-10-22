@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 import NavDialog from "./NavDialog/NavDialog";
 
 const Navbar = (props) => {
-    let usersDialogsElements = props.usersDialogs.map(user => <NavDialog id={user.id} name={user.name}/>)
+    let usersDialogsElements = props.usersDialogs.map(user => <NavDialog id={user.id} name={user.name} key={user.id}/>)
 
     return <nav className={s.nav}>
         <div className={s.item}>

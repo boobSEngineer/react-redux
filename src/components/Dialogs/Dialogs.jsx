@@ -3,7 +3,7 @@ import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 
 const Dialogs = (props) => {
-    let messagesElements = props.messages.map(message => <Message dialog={message.message}/>);
+    let messagesElements = props.messages.map(message => <Message dialog={message.message} key={message.id}/>);
 
     let addMessage = () => {
         props.addMessage();
