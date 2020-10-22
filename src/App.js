@@ -11,6 +11,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 
 const App = (props) => {
+    // just trying to setup github
     return (
         <div className='wrapper'>
             <Header/>
