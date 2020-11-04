@@ -4,10 +4,10 @@
   width: 1200px;
   
   grid-template-areas: 
-  "h h h "
-  "g n c ";
+  "h h "
+  "n c ";
 
-  grid-template-columns: 5% 20% 75% ;
+  grid-template-columns:  20% 75% ;
   grid-template-rows: 50px auto;
   
 }
