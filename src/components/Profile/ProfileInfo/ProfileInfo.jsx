@@ -16,7 +16,10 @@ const ProfileInfo = (props) => {
                 <img src={props.profile.photos.large}/>
             </div>
             <div>
-                inf
+                {props.profile.fullName}
+            </div>
+            <div>
+                GitHub: {props.profile.contacts.github}
             </div>
         </div>
     )
