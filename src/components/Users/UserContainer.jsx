@@ -45,7 +45,7 @@ class UsersContainer extends React.Component {
                 unfollow={this.props.unfollow}
                 pageChanged={this.pageChanged}
             />
-            <Preloader isFetching={this.props.isFetching}/>
+            {this.props.isFetching? <Preloader />: null}
         </>
     };
 
