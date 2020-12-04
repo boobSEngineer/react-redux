@@ -9,7 +9,6 @@ import {
     userSetCreate
 } from '../../redux/user-reducer';
 import * as axios from 'axios';
-import preloader from '../../assets/preloader.svg';
 import Preloader from "../common/Preloader/Preloader";
 
 class UsersContainer extends React.Component {
