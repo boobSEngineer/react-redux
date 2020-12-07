@@ -14,7 +14,9 @@ import Preloader from "../common/Preloader/Preloader";
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.toggleIsFetching(false);
                 this.props.userSet(response.data.items);
@@ -25,7 +27,9 @@ class UsersContainer extends React.Component {
     pageChanged = (page) => {
         this.props.toggleIsFetching(true);
         this.props.currentPageSet(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.toggleIsFetching(false);
                 this.props.userSet(response.data.items);
@@ -45,7 +49,7 @@ class UsersContainer extends React.Component {
                 unfollow={this.props.unfollow}
                 pageChanged={this.pageChanged}
             />
-            {this.props.isFetching? <Preloader />: null}
+            {this.props.isFetching ? <Preloader/> : null}
         </>
     };
 

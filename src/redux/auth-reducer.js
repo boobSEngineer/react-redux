@@ -4,7 +4,8 @@ const SET_AUTH_DATA_USER = 'SET-AUTH-DATA-USER'
 let initialState = {
     userId: null,
     login: null,
-    email: null
+    email: null,
+    isAuth: false
 }
 
 
@@ -14,7 +15,8 @@ const authReducer = (state = initialState, action) => {
         case SET_AUTH_DATA_USER: {
             return {
                     ...state,
-                    ...action.data
+                    ...action.data,
+                    isAuth:true
                 }
             }
         default:
