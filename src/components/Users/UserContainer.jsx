@@ -8,32 +8,28 @@ import {
     unfollowCreate,
     userSetCreate
 } from '../../redux/user-reducer';
-import * as axios from 'axios';
 import Preloader from "../common/Preloader/Preloader";
+import {usersAPI} from "../../API/api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-            .then(response => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false);
-                this.props.userSet(response.data.items);
-                this.props.totalUsersSet(response.data.totalCount);
+                this.props.userSet(data.items);
+                this.props.totalUsersSet(data.totalCount);
             })
     }
 
     pageChanged = (page) => {
         this.props.toggleIsFetching(true);
         this.props.currentPageSet(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-            .then(response => {
+        usersAPI.getUsers(page, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false);
-                this.props.userSet(response.data.items);
-                this.props.totalUsersSet(response.data.totalCount);
+                this.props.userSet(data.items);
+                this.props.totalUsersSet(data.totalCount);
 
             })
     }
@@ -64,34 +60,6 @@ const mapStateToProps = (state) => {
         isFetching: state.userPage.isFetching
     }
 };
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         follow: (userId) => {
-//             dispatch(followCreate(userId));
-//         },
-//
-//         unfollow: (userId) => {
-//             dispatch(unfollowCreate(userId))
-//         },
-//
-//         userSet: (users) => {
-//             dispatch(userSetCreate(users));
-//         },
-//
-//         currentPageSet: (currentPage) => {
-//             dispatch(setCurrentPageCreate(currentPage))
-//         },
-//
-//         totalUsersSet: (totalUsers) => {
-//             dispatch(totalUsersSetCrate(totalUsers))
-//         },
-//         toggleIsFetching: (isFetching) => {
-//             dispatch(toggleIsFetchingCreate(isFetching))
-//         }
-//
-//     }
-// };
 
 export const UserContainer = connect(mapStateToProps,
     {
