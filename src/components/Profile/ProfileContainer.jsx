@@ -1,9 +1,8 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {setUserProfileCreate} from "../../redux/profille-reducer";
-import {withRouter} from "react-router-dom";
-import {profileAPI} from "../../API/api";
+import {getProfileThunkCreate} from "../../redux/profille-reducer";
+import {Redirect, withRouter} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -11,23 +10,24 @@ class ProfileContainer extends React.Component {
         if (!userId) {
             userId = 2;
         }
-        profileAPI.getProfile(userId)
-            .then(data => {
-                this.props.setUserProfile(data)
-            });
+        this.props.getProfile(userId);
     }
 
     render() {
+        if(!this.props.isAuth) return <Redirect to={'/login'}/>
         return (<Profile {...this.props} profile={this.props.profile}/>)
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        isAuth: state.auth.isAuth
     }
 }
 
 let WithUrlDateContainerComponent = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, {setUserProfile:setUserProfileCreate})(WithUrlDateContainerComponent);
+export default connect(mapStateToProps,
+    {getProfile: getProfileThunkCreate
+    })(WithUrlDateContainerComponent);

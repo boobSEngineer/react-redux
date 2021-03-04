@@ -1,37 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import User from './User';
-import {
-    followCreate,
-    setCurrentPageCreate, toggleFollowingInProgressCreate, toggleIsFetchingCreate,
-    totalUsersSetCrate,
-    unfollowCreate,
-    userSetCreate
+import { followUsersThunkCreate, getUsersThunkCreate, setCurrentPageCreate,
+    unfollowUsersThunkCreate
 } from '../../redux/user-reducer';
 import Preloader from "../common/Preloader/Preloader";
-import {usersAPI} from "../../API/api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.userSet(data.items);
-                this.props.totalUsersSet(data.totalCount);
-            })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
-    pageChanged = (page) => {
-        this.props.toggleIsFetching(true);
-        this.props.currentPageSet(page);
-        usersAPI.getUsers(page, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.userSet(data.items);
-                this.props.totalUsersSet(data.totalCount);
-
-            })
+    pageChanged = (pageNumber) => {
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -46,6 +27,9 @@ class UsersContainer extends React.Component {
                 pageChanged={this.pageChanged}
                 toggleFollowingInProgress={this.props.toggleFollowingInProgress}
                 followingInProgress={this.props.followingInProgress}
+                followUser={this.props.followUser}
+                unfollowUser={this.props.unfollowUser}
+
             />
             {this.props.isFetching ? <Preloader/> : null}
         </>
@@ -67,12 +51,9 @@ const mapStateToProps = (state) => {
 
 export const UserContainer = connect(mapStateToProps,
     {
-        follow: followCreate,
-        unfollow: unfollowCreate,
-        userSet: userSetCreate,
         currentPageSet: setCurrentPageCreate,
-        totalUsersSet: totalUsersSetCrate,
-        toggleIsFetching: toggleIsFetchingCreate,
-        toggleFollowingInProgress: toggleFollowingInProgressCreate
+        getUsers: getUsersThunkCreate,
+        followUser: followUsersThunkCreate,
+        unfollowUser: unfollowUsersThunkCreate,
     }
 )(UsersContainer);

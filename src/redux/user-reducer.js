@@ -1,3 +1,5 @@
+import {usersAPI} from "../API/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -13,7 +15,7 @@ let initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: false
+    followingInProgress: []
 }
 
 const userReducer = (state = initialState, action) => {
@@ -69,12 +71,15 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 followingInProgress: action.followingInProgress
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id != action.userId)
             }
         }
         default:
             return state;
     }
 }
+
 export const followCreate = (userId) => {
     return {type: FOLLOW, userId}
 }
@@ -91,19 +96,54 @@ export const setCurrentPageCreate = (currentPage) => {
     return {type: SET_PAGE_CURRENT, currentPage}
 }
 
-export const totalUsersSetCrate = (totalUsers) => {
-    return {type: SET_TOTAL_USERS, count:totalUsers}
+export const totalUsersSetCreate = (totalUsers) => {
+    return {type: SET_TOTAL_USERS, count: totalUsers}
 }
 
 export const toggleIsFetchingCreate = (isFetching) => {
     return {type: TOGGLE_IS_FETCHING, isFetching}
 }
 
-export const toggleFollowingInProgressCreate = (followingInProgress) => {
-    return {type: TOGGLE_FOLLOWING_IN_PROGRESS, followingInProgress}
+export const toggleFollowingInProgressCreate = (followingInProgress, userId) => {
+    return {type: TOGGLE_FOLLOWING_IN_PROGRESS, followingInProgress, userId}
 }
 
+export const getUsersThunkCreate = (currentPage,pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetchingCreate(true));
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetchingCreate(false));
+                dispatch(userSetCreate(data.items));
+                dispatch(totalUsersSetCreate(data.totalCount));
+            })
+    }
+}
 
+export const followUsersThunkCreate = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingInProgressCreate(true, userId));
+            usersAPI.followUsers(userId)
+                .then(data => {
+                    if (data !== null) {
+                        dispatch(followCreate(userId));
+                    }
+                    dispatch(toggleFollowingInProgressCreate(false, userId));
+                })
+    }
+}
 
+export const unfollowUsersThunkCreate = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingInProgressCreate(true, userId));
+        usersAPI.unfollowUsers(userId)
+            .then(data => {
+                if (data !== null) {
+                    dispatch(unfollowCreate(userId));
+                }
+                dispatch(toggleFollowingInProgressCreate(false, userId));
+            })
+    }
+}
 
 export default userReducer;

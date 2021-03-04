@@ -10,6 +10,7 @@ import ConversationContainer from "./components/Conversation/ConversationContain
 import {UserContainer} from "./components/Users/UserContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import LoginPage from "./components/Login/login"; //Пример export default (можем другое имя подставить, при импорте компоненты)
 
 const App = (props) => {
     return (
@@ -17,6 +18,7 @@ const App = (props) => {
             <HeaderContainer/>
             <NavbarContainer/>
             <div className='wrapper_content'>
+                <Route path='/login' render={() => <LoginPage/>}/>
                 <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                 <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                 <Route path='/conversation' render={() => <ConversationContainer/>}/>
