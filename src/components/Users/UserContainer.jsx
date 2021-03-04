@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import User from './User';
-import { followUsersThunkCreate, getUsersThunkCreate, setCurrentPageCreate,
+import {
+    followUsersThunkCreate, getUsersThunkCreate, setCurrentPageCreate,
     unfollowUsersThunkCreate
 } from '../../redux/user-reducer';
 import Preloader from "../common/Preloader/Preloader";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -49,11 +51,13 @@ const mapStateToProps = (state) => {
     }
 };
 
-export const UserContainer = connect(mapStateToProps,
-    {
-        currentPageSet: setCurrentPageCreate,
-        getUsers: getUsersThunkCreate,
-        followUser: followUsersThunkCreate,
-        unfollowUser: unfollowUsersThunkCreate,
-    }
+export default compose(
+    connect(mapStateToProps,
+        {
+            currentPageSet: setCurrentPageCreate,
+            getUsers: getUsersThunkCreate,
+            followUser: followUsersThunkCreate,
+            unfollowUser: unfollowUsersThunkCreate,
+        }
+    ),
 )(UsersContainer);

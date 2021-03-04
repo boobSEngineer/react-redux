@@ -2,6 +2,7 @@ import React from 'react';
 import Conversation from "./Conversation";
 import {connect} from "react-redux";
 import {conversationSetCreate, followCreate, unfollowCreate} from "../../redux/conversation-reducer";
+import {compose} from "redux";
 
 
 const mapStateToProps = (state) => {
@@ -24,7 +25,6 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 }
-
-const ConversationContainer = connect(mapStateToProps, mapDispatchToProps)(Conversation);
-
-export default ConversationContainer;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+)(Conversation);

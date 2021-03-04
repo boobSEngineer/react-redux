@@ -7,7 +7,7 @@ import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import ConversationContainer from "./components/Conversation/ConversationContainer";
-import {UserContainer} from "./components/Users/UserContainer";
+import UserContainer from "./components/Users/UserContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/login"; //Пример export default (можем другое имя подставить, при импорте компоненты)
