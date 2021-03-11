@@ -7,6 +7,16 @@ class ProfileStatus extends React.Component {
         status: this.props.status
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        debugger
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status,
+            })
+        }
+        //console.log('РАБОТАЕТ')
+    }
+
     activateSetState = () => {
         this.setState( {
             editMode: true
